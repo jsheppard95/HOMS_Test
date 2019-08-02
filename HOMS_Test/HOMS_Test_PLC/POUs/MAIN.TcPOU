@@ -52,18 +52,16 @@ VAR
 END_VAR	
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Fwd/Bwd Enables to monitor:
-bM1Fwd := M1.bLimAllFwd;
-bM1Bwd := M1.bLimAllBwd;
-bM2Fwd := M2.bLimAllFwd;
-bM2Bwd := M2.bLimAllBwd;
-
+      <ST><![CDATA[(*
+// Pretend encoder counts
 y_up_enc.Count := LREAL_TO_ULINT(M1.stAxisStatus.fActPosition * 1000 * EXPT(10, 6));
 y_dwn_enc.Count := LREAL_TO_ULINT(M2.stAxisStatus.fActPosition * EXPT(10, 6));
+*)
 M1.bSTO := sto;
 M2.bSTO := sto;
 M3.bSTO := sto; 
 M4.bSTO := sto;
+
 
 y_limit_gantry(PEnc:=y_up_enc, SEnc:=y_dwn_enc, GantDiffTol:=LREAL_TO_LINT(M1.fGantryTol),
 				PLimFwd=>M1.bLimGntFwd, PLimBwd=>M1.bLimGntBwd,
@@ -93,11 +91,14 @@ y_couple ( Master:=M1.Axis, Slave:=M2.Axis, Execute:=(M1.bEnabled AND M2.bEnable
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="182" Count="3" />
-      <LineId Id="180" Count="1" />
+      <LineId Id="235" Count="0" />
+      <LineId Id="181" Count="0" />
       <LineId Id="126" Count="0" />
       <LineId Id="125" Count="0" />
-      <LineId Id="49" Count="25" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="49" Count="2" />
+      <LineId Id="237" Count="0" />
+      <LineId Id="52" Count="22" />
       <LineId Id="78" Count="3" />
       <LineId Id="2" Count="0" />
     </LineIds>

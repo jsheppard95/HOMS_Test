@@ -32,9 +32,9 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderReference Include="lcls-twincat-motion-jackson">
-      <DefaultResolution>lcls-twincat-motion-jackson, * (SLAC)</DefaultResolution>
-      <Namespace>lcls_twincat_motion_jackson</Namespace>
+    <PlaceholderReference Include="lcls-twincat-motion-gantry-lib-sheppard">
+      <DefaultResolution>lcls-twincat-motion-gantry-lib-sheppard, * (SLAC)</DefaultResolution>
+      <Namespace>lcls_twincat_motion_gantry_lib_sheppard</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_MC2">
       <DefaultResolution>Tc2_MC2, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -58,17 +58,17 @@
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderResolution Include="lcls-twincat-motion-jackson">
-      <Resolution>lcls-twincat-motion-jackson, * (SLAC)</Resolution>
+    <None Include="HOMS_Test_PLC.tmc">
+      <SubType>Content</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="lcls-twincat-motion-gantry-lib-sheppard">
+      <Resolution>lcls-twincat-motion-gantry-lib-sheppard, * (SLAC)</Resolution>
     </PlaceholderResolution>
     <PlaceholderResolution Include="TcUnit">
       <Resolution>TcUnit, 0.4.1.0 (www.tcunit.org)</Resolution>
     </PlaceholderResolution>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="HOMS_Test_PLC.tmc">
-      <SubType>Content</SubType>
-    </None>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
