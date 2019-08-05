@@ -1327,8 +1327,8 @@ External Setpoint Generation:
 			<Dynamic Acceleration="0.5" Deceleration="0.5" DelayTime="0.008"/>
 			<Velo Maximum="0.3"/>
 			<OtherSettings AllowMotionCmdToSlave="true"/>
-			<ParameterChanged>260</ParameterChanged>
 			<ParameterChanged>39</ParameterChanged>
+			<ParameterChanged>260</ParameterChanged>
 			<ParameterChanged>257</ParameterChanged>
 			<ParameterChanged>258</ParameterChanged>
 		</AxisPara>

@@ -701,12 +701,12 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
-			<Name GUID="{1379F8AA-501B-460A-A040-E54AB980F004}" Namespace="lcls_twincat_motion_jackson" AutoDeleteType="true">EL5042_Status</Name>
+			<Name GUID="{9DEC7CBF-317F-4DAC-B425-168B29D9FF5A}" Namespace="lcls_twincat_motion_gantry_lib_sheppard" AutoDeleteType="true">EL5042_Status</Name>
 			<BitSize>0</BitSize>
 			<BaseType GUID="{FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF}"/>
 		</DataType>
 		<DataType>
-			<Name GUID="{E0FB0362-31EC-4793-87B9-148B0D0A704B}" Namespace="lcls_twincat_motion_jackson" AutoDeleteType="true">ST_RenishawAbsEnc</Name>
+			<Name GUID="{05073F7F-9F63-4010-923C-ABD5D4AB6CDE}" Namespace="lcls_twincat_motion_gantry_lib_sheppard" AutoDeleteType="true">ST_RenishawAbsEnc</Name>
 			<Comment>
 				<![CDATA[ Renishaw BiSS-C absolute encoder used with an EL5042 ]]>
 			</Comment>
@@ -722,7 +722,7 @@ External Setpoint Generation:
 			</SubItem>
 			<SubItem>
 				<Name>Status</Name>
-				<Type GUID="{1379F8AA-501B-460A-A040-E54AB980F004}" Namespace="lcls_twincat_motion_jackson">EL5042_Status</Type>
+				<Type GUID="{9DEC7CBF-317F-4DAC-B425-168B29D9FF5A}" Namespace="lcls_twincat_motion_gantry_lib_sheppard">EL5042_Status</Type>
 				<Comment>
 					<![CDATA[ Status struct placeholder]]>
 				</Comment>
@@ -1250,6 +1250,71 @@ External Setpoint Generation:
 					<Type>BOOL</Type>
 				</Var>
 				<Var>
+					<Name>Main.M6.Axis.NcToPlc</Name>
+					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<SubVar>
+						<Name>AxisState</Name>
+						<Comment>
+							<![CDATA[Present State Of The Axis Movement (continuous axis):
+0  = INACTIVE:		axis has no job
+1  = RUNNING:		axis is executing a motion job
+2  = OVERRIDE_ZERO:	axis is executing a job but override is zero
+3  = PHASE_VELOCONST:	axis is moving at constant velocity
+4  = PHASE_ACCPOS:	axis is accelerating
+5  = PHASE_ACCNEG:	axis is decelerating
+Slaves only:
+11 = PREPHASE:		slave axis is in a motion pre-phase
+12 = SYNCHRONIZING:	slave axis is synchronizing
+13 = SYNCHRONOUS:	slave axis is moving synchronously
+External Setpoint Generation:
+41 = EXTSETGEN_MODE1:	external setpoint generation active
+42 = EXTSETGEN_MODE2:	internal and external setpoint gen. active
+]]>
+						</Comment>
+					</SubVar>
+					<SubVar>
+						<Name>HomingState</Name>
+						<Comment>
+							<![CDATA[Axis Homing Status:
+0: idle
+1: start homing
+2: searching home switch
+3: stopping on home switch
+4: moving off home switch
+5: searching sync pulse
+6: stopping after homing
+]]>
+						</Comment>
+					</SubVar>
+					<SubVar>
+						<Name>CoupleState</Name>
+						<Comment>
+							<![CDATA[Axis Coupling Status:
+0: axis is a single axis (not coupled)
+1: axis is a master axis
+2: axis is master and slave
+3: axis is a slave axis
+]]>
+						</Comment>
+					</SubVar>
+				</Var>
+				<Var>
+					<Name>Main.M6.bLimFwd</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>Main.M6.bLimBwd</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>Main.M6.bHome</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
+					<Name>Main.M6.bSTO</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
 					<Name>Main.fbMotionStage_x_up.fbDriveVirtual.MasterAxis.NcToPlc</Name>
 					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
@@ -1495,12 +1560,61 @@ External Setpoint Generation:
 					</SubVar>
 				</Var>
 				<Var>
+					<Name>Main.fbMotionStage_bender.fbDriveVirtual.MasterAxis.NcToPlc</Name>
+					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<SubVar>
+						<Name>AxisState</Name>
+						<Comment>
+							<![CDATA[Present State Of The Axis Movement (continuous axis):
+0  = INACTIVE:		axis has no job
+1  = RUNNING:		axis is executing a motion job
+2  = OVERRIDE_ZERO:	axis is executing a job but override is zero
+3  = PHASE_VELOCONST:	axis is moving at constant velocity
+4  = PHASE_ACCPOS:	axis is accelerating
+5  = PHASE_ACCNEG:	axis is decelerating
+Slaves only:
+11 = PREPHASE:		slave axis is in a motion pre-phase
+12 = SYNCHRONIZING:	slave axis is synchronizing
+13 = SYNCHRONOUS:	slave axis is moving synchronously
+External Setpoint Generation:
+41 = EXTSETGEN_MODE1:	external setpoint generation active
+42 = EXTSETGEN_MODE2:	internal and external setpoint gen. active
+]]>
+						</Comment>
+					</SubVar>
+					<SubVar>
+						<Name>HomingState</Name>
+						<Comment>
+							<![CDATA[Axis Homing Status:
+0: idle
+1: start homing
+2: searching home switch
+3: stopping on home switch
+4: moving off home switch
+5: searching sync pulse
+6: stopping after homing
+]]>
+						</Comment>
+					</SubVar>
+					<SubVar>
+						<Name>CoupleState</Name>
+						<Comment>
+							<![CDATA[Axis Coupling Status:
+0: axis is a single axis (not coupled)
+1: axis is a master axis
+2: axis is master and slave
+3: axis is a slave axis
+]]>
+						</Comment>
+					</SubVar>
+				</Var>
+				<Var>
 					<Name>Main.sto</Name>
 					<Type>BOOL</Type>
 				</Var>
 				<Var>
 					<Name>Main.x_up_enc</Name>
-					<Type GUID="{E0FB0362-31EC-4793-87B9-148B0D0A704B}" Namespace="lcls_twincat_motion_jackson">ST_RenishawAbsEnc</Type>
+					<Type GUID="{05073F7F-9F63-4010-923C-ABD5D4AB6CDE}" Namespace="lcls_twincat_motion_gantry_lib_sheppard">ST_RenishawAbsEnc</Type>
 					<SubVar>
 						<Name>Count</Name>
 						<Comment>
@@ -1522,7 +1636,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>Main.x_dwn_enc</Name>
-					<Type GUID="{E0FB0362-31EC-4793-87B9-148B0D0A704B}" Namespace="lcls_twincat_motion_jackson">ST_RenishawAbsEnc</Type>
+					<Type GUID="{05073F7F-9F63-4010-923C-ABD5D4AB6CDE}" Namespace="lcls_twincat_motion_gantry_lib_sheppard">ST_RenishawAbsEnc</Type>
 					<SubVar>
 						<Name>Count</Name>
 						<Comment>
@@ -1544,7 +1658,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>Main.y_up_enc</Name>
-					<Type GUID="{E0FB0362-31EC-4793-87B9-148B0D0A704B}" Namespace="lcls_twincat_motion_jackson">ST_RenishawAbsEnc</Type>
+					<Type GUID="{05073F7F-9F63-4010-923C-ABD5D4AB6CDE}" Namespace="lcls_twincat_motion_gantry_lib_sheppard">ST_RenishawAbsEnc</Type>
 					<SubVar>
 						<Name>Count</Name>
 						<Comment>
@@ -1566,7 +1680,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>Main.y_dwn_enc</Name>
-					<Type GUID="{E0FB0362-31EC-4793-87B9-148B0D0A704B}" Namespace="lcls_twincat_motion_jackson">ST_RenishawAbsEnc</Type>
+					<Type GUID="{05073F7F-9F63-4010-923C-ABD5D4AB6CDE}" Namespace="lcls_twincat_motion_gantry_lib_sheppard">ST_RenishawAbsEnc</Type>
 					<SubVar>
 						<Name>Count</Name>
 						<Comment>
@@ -1609,6 +1723,34 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>Main.y_limit_gantry.SEnc.Count</Name>
+					<Comment>
+						<![CDATA[ Connect to encoder "Position" input]]>
+					</Comment>
+					<Type>ULINT</Type>
+				</Var>
+				<Var>
+					<Name>Main.fbAutoCoupleX.gantry_diff_limit.PEnc.Count</Name>
+					<Comment>
+						<![CDATA[ Connect to encoder "Position" input]]>
+					</Comment>
+					<Type>ULINT</Type>
+				</Var>
+				<Var>
+					<Name>Main.fbAutoCoupleX.gantry_diff_limit.SEnc.Count</Name>
+					<Comment>
+						<![CDATA[ Connect to encoder "Position" input]]>
+					</Comment>
+					<Type>ULINT</Type>
+				</Var>
+				<Var>
+					<Name>Main.fbAutoCoupleY.gantry_diff_limit.PEnc.Count</Name>
+					<Comment>
+						<![CDATA[ Connect to encoder "Position" input]]>
+					</Comment>
+					<Type>ULINT</Type>
+				</Var>
+				<Var>
+					<Name>Main.fbAutoCoupleY.gantry_diff_limit.SEnc.Count</Name>
 					<Comment>
 						<![CDATA[ Connect to encoder "Position" input]]>
 					</Comment>
@@ -1658,6 +1800,14 @@ External Setpoint Generation:
 					<Type>BOOL</Type>
 				</Var>
 				<Var>
+					<Name>Main.M6.Axis.PlcToNc</Name>
+					<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+				</Var>
+				<Var>
+					<Name>Main.M6.bBrake</Name>
+					<Type>BOOL</Type>
+				</Var>
+				<Var>
 					<Name>Main.fbMotionStage_x_up.fbDriveVirtual.MasterAxis.PlcToNc</Name>
 					<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 				</Var>
@@ -1677,6 +1827,10 @@ External Setpoint Generation:
 					<Name>Main.fbMotionStage_pitch.fbDriveVirtual.MasterAxis.PlcToNc</Name>
 					<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 				</Var>
+				<Var>
+					<Name>Main.fbMotionStage_bender.fbDriveVirtual.MasterAxis.PlcToNc</Name>
+					<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+				</Var>
 			</Vars>
 			<TaskPouOids>
 				<TaskPouOid Prio="20" OTCID="#x01010011"/>
@@ -1685,7 +1839,7 @@ External Setpoint Generation:
 	</Project>
 	<Mappings>
 		<OwnerA Name="HOMS_Test_PLC Instance">
-			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis_PitchCourse">
+			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis_PitchCoarse">
 				<Link VarA="PlcTask Inputs^Main.M5.Axis.NcToPlc" VarB="Outputs^ToPlc"/>
 				<Link VarA="PlcTask Outputs^Main.M5.Axis.PlcToNc" VarB="Inputs^FromPlc"/>
 			</OwnerB>

@@ -20,7 +20,7 @@
 		<Axis File="Axis_Ydwn.xti" Id="4"/>
 		<Axis File="Axis_Xup.xti" Id="1"/>
 		<Axis File="Axis_Xdwn.xti" Id="2"/>
-		<Axis File="Axis_PitchCourse.xti" Id="5"/>
+		<Axis File="Axis_PitchCoarse.xti" Id="5"/>
 		<Axis File="Axis 6.xti" Id="6"/>
 	</NC>
 </TcSmItem>
