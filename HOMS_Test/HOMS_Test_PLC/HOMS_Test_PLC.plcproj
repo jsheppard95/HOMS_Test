@@ -15,9 +15,6 @@
     <LibraryReferences>{93869408-782e-4825-b8c3-36f33634b6f4}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DUTs\ST_RenishawEnc.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
