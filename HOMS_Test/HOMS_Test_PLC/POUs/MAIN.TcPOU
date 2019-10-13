@@ -1,26 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
-  <POU Name="MAIN" Id="{d73f6033-1c1a-47a8-be0f-3a700ab10cd1}" SpecialFunc="None">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="Main" Id="{d73f6033-1c1a-47a8-be0f-3a700ab10cd1}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM Main
 VAR
-//	{attribute 'TcLinkTo' := '.bLimFwd:=TIIB[y_up]^STM Status^Status^Digital input 1; .bLimBwd:=TIIB[y_up]^STM Status^Status^Digital input 2; .bSTO:=TIIB[di]^Channel 1^Input'}	
-	{attribute 'TcLinkTo':='.bLimFwd:=TIIB[y_up]^STM Status^Status^Digital input 1'}		
     M1: DUT_MotionStage:=(nCommand:=3); // Yup
-//	{attribute 'TcLinkTo' := '.bLimFwd:=TIIB[y_dwn]^STM Status^Status^Digital input 1; .bLimBwd:=TIIB[y_dwn]^STM Status^Status^Digital input 2'}
+	{attribute 'pytmc' := '
+	  pv: AXISYUP
+	'}
+	fbMotionStage_y_up : FB_MotionStage;
+
 	M2: DUT_MotionStage:=(nCommand:=3); // Ydwn
-//	{attribute 'TcLinkTo' := '.bLimFwd:=TIIB[x_up]^STM Status^Status^Digital input 1; .bLimBwd:=TIIB[x_up]^STM Status^Status^Digital input 2'}	
 	M3: DUT_MotionStage:=(nCommand:=3); // Xup
-//	{attribute 'TcLinkTo' := '.bLimFwd:=TIIB[x_dwn]^STM Status^Status^Digital input 1; .bLimBwd:=TIIB[x_dwn]^STM Status^Status^Digital input 2'}
 	M4: DUT_MotionStage:=(nCommand:=3); // Xdwn
-//	{attribute 'TcLinkTo' := '.bLimFwd:=TIIB[pitch]^STM Status^Status^Digital input 1; .bLimBwd:=TIIB[pitch]^STM Status^Status^Digital input 2'}	
-	M5: DUT_MotionStage:=(nCommand:=3); // PitchCoarse
-//	{attribute 'TcLinkTo' := '.bLimFwd:=TIIB[pitch]^STM Status^Status^Digital input 1; .bLimBwd:=TIIB[pitch]^STM Status^Status^Digital input 2'}	
+	M5: DUT_MotionStage:=(nCommand:=3); // PitchCoarse	
 	M6: DUT_MotionStage:=(nCommand:=3); // Bender
 
-	fbMotionStage_x_up, fbMotionStage_x_dwn, fbMotionStage_y_up, fbMotionStage_y_dwn, fbMotionStage_pitch, fbMotionStage_bender : FB_MotionStage;
+	fbMotionStage_x_up, fbMotionStage_x_dwn, fbMotionStage_y_dwn, fbMotionStage_pitch, fbMotionStage_bender : FB_MotionStage;
 
 	stoEnable AT %I* : BOOL;
-
 	{attribute 'TcLinkTo' := '.Count:=TIIB[1-x_up_2-x_dwn]^FB Inputs Channel 1^Position'}	
 	x_up_enc  AT %I*: ST_RenishawAbsEnc;
 	{attribute 'TcLinkTo' := '.Count:=TIIB[1-x_up_2-x_dwn]^FB Inputs Channel 2^Position'}
@@ -47,10 +44,14 @@ VAR
 	nCurrGantryY : LINT;
 	nGantryTolX : LINT := 25000;
 	nGantryTolY : LINT := 25000;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Buttons to enable motors: write 0 to enable, 2 to disable
+      <ST><![CDATA[M1.bLimitForwardEnable := TRUE;
+M1.bLimitBackwardEnable := TRUE;
+M1.bPowerSelf := TRUE;
+M1.nEnableMode := ENUM_StageEnableMode.STAGE_ENABLE_ALWAYS;
+
+// Buttons to enable motors: write 0 to enable, 2 to disable
 M1.nEnableMode; // Yup
 M2.nEnableMode; // Ydwn
 M3.nEnableMode; // Xup
@@ -58,9 +59,9 @@ M4.nEnableMode; // Xdwn
 M5.nEnableMode; // PitchCoarse
 M6.nEnableMode; // Bender
 
-// Encoder Reference Values: Starting motor positions prior to checkout
+// Encoder Reference Values:
 y_up_enc.Ref := 0;
-y_dwn_enc.Ref := 0; // Use initial motor positions for now
+y_dwn_enc.Ref := 0;
 x_up_enc.Ref := 0; 
 x_dwn_enc.Ref := 0;
 
@@ -88,6 +89,7 @@ fbAutoCoupleX(nGantryTol:=nGantryTolX, Master:=M3, MasterEnc:=x_up_enc, Slave:=M
 	          SlaveEnc:=x_dwn_enc, bExecuteCouple:=bExecuteCoupleX,
               bExecuteDecouple:=bExecuteDecoupleX,
               bGantryAlreadyCoupled=>bGantryAlreadyCoupledX);
+
 fbAutoCoupleY(nGantryTol:=nGantryTolY, Master:=M1, MasterEnc:=y_up_enc, Slave:=M2,
 	          SlaveEnc:=y_dwn_enc, bExecuteCouple:=bExecuteCoupleY,
               bExecuteDecouple:=bExecuteDecoupleY,
