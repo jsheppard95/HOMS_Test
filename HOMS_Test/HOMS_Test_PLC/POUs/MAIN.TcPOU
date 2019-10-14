@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.14">
   <POU Name="Main" Id="{d73f6033-1c1a-47a8-be0f-3a700ab10cd1}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM Main
 VAR
@@ -13,7 +13,7 @@ VAR
 	M3: DUT_MotionStage:=(nCommand:=3); // Xup
 	M4: DUT_MotionStage:=(nCommand:=3); // Xdwn
 	M5: DUT_MotionStage:=(nCommand:=3); // PitchCoarse	
-	M6: DUT_MotionStage:=(nCommand:=3); // Bender
+//	M6: DUT_MotionStage:=(nCommand:=3); // Bender
 
 	fbMotionStage_x_up, fbMotionStage_x_dwn, fbMotionStage_y_dwn, fbMotionStage_pitch, fbMotionStage_bender : FB_MotionStage;
 
@@ -57,7 +57,7 @@ M2.nEnableMode; // Ydwn
 M3.nEnableMode; // Xup
 M4.nEnableMode; // Xdwn
 M5.nEnableMode; // PitchCoarse
-M6.nEnableMode; // Bender
+//M6.nEnableMode; // Bender
 
 // Encoder Reference Values:
 y_up_enc.Ref := 0;
@@ -82,7 +82,7 @@ M2.bHardwareEnable := stoEnable;
 M3.bHardwareEnable := stoEnable;
 M4.bHardwareEnable := stoEnable;
 M5.bHardwareEnable := stoEnable;
-M6.bHardwareEnable := stoEnable;
+//M6.bHardwareEnable := stoEnable;
 
 // Start Autocoupling
 fbAutoCoupleX(nGantryTol:=nGantryTolX, Master:=M3, MasterEnc:=x_up_enc, Slave:=M4,
@@ -100,7 +100,11 @@ fbMotionStage_y_dwn (stMotionStage:=M2);
 fbMotionStage_x_up  (stMotionStage:=M3);
 fbMotionStage_x_dwn (stMotionStage:=M4);
 fbMotionStage_pitch (stMotionStage:=M5);
-fbMotionStage_bender (stMotionStage:=M6);]]></ST>
+//fbMotionStage_bender (stMotionStage:=M6);]]></ST>
     </Implementation>
+    <LineIds Name="Main">
+      <LineId Id="3" Count="53" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
