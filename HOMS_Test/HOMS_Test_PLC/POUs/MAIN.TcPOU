@@ -3,13 +3,13 @@
   <POU Name="Main" Id="{d73f6033-1c1a-47a8-be0f-3a700ab10cd1}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM Main
 VAR
-    M1: DUT_MotionStage:=(nCommand:=3); // Yup
+    M1: DUT_MotionStage; // Yup
 	{attribute 'pytmc' := '
 	  pv: AXISYUP
 	'}
 	fbMotionStage_y_up : FB_MotionStage;
 
-	M2: DUT_MotionStage:=(nCommand:=3); // Ydwn
+	M2: DUT_MotionStage; // Ydwn
 	{attribute 'pytmc' := '
 	  pv: AXISYDWN
 	'}
@@ -20,7 +20,10 @@ VAR
 //	M6: DUT_MotionStage:=(nCommand:=3); // Bender
 
 //	fbMotionStage_x_up, fbMotionStage_x_dwn, fbMotionStage_y_dwn, fbMotionStage_pitch, fbMotionStage_bender : FB_MotionStage;
-
+	{attribute 'pytmc' := '
+	  pv: TEST:MAIN:STOENABLE
+	  io: io
+	'}
 	stoEnable AT %I* : BOOL;
 //	{attribute 'TcLinkTo' := '.Count:=TIIB[1-x_up_2-x_dwn]^FB Inputs Channel 1^Position'}
 //	x_up_enc  AT %I*: ST_RenishawAbsEnc;

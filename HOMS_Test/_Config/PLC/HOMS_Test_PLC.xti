@@ -701,15 +701,15 @@ External Setpoint Generation:
 			</Relations>
 		</DataType>
 		<DataType>
-			<Name GUID="{8EC1255B-8AE8-4161-B868-BDBBCFEB3AE4}" Namespace="lcls_twincat_motion_sheppard" AutoDeleteType="true">EL5042_Status</Name>
+			<Name GUID="{35AFA9A4-A94A-4B24-95AA-7F2C961294FF}" Namespace="lcls_twincat_motion_sheppard" AutoDeleteType="true">EL5042_Status</Name>
 			<BitSize>0</BitSize>
 			<BaseType GUID="{FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF}"/>
 			<Hides>
-				<Hide GUID="{12F2056B-8FCE-45EE-81D2-920741032A14}"/>
+				<Hide GUID="{8EC1255B-8AE8-4161-B868-BDBBCFEB3AE4}"/>
 			</Hides>
 		</DataType>
 		<DataType>
-			<Name GUID="{6B3A53D1-B14A-400A-B270-9EA78004876C}" Namespace="lcls_twincat_motion_sheppard" AutoDeleteType="true">ST_RenishawAbsEnc</Name>
+			<Name GUID="{8AD2E20B-9537-4513-AFA5-50392FDB2DEE}" Namespace="lcls_twincat_motion_sheppard" AutoDeleteType="true">ST_RenishawAbsEnc</Name>
 			<Comment>
 				<![CDATA[ Renishaw BiSS-C absolute encoder used with an EL5042 ]]>
 			</Comment>
@@ -725,7 +725,7 @@ External Setpoint Generation:
 			</SubItem>
 			<SubItem>
 				<Name>Status</Name>
-				<Type GUID="{8EC1255B-8AE8-4161-B868-BDBBCFEB3AE4}" Namespace="lcls_twincat_motion_sheppard">EL5042_Status</Type>
+				<Type GUID="{35AFA9A4-A94A-4B24-95AA-7F2C961294FF}" Namespace="lcls_twincat_motion_sheppard">EL5042_Status</Type>
 				<Comment>
 					<![CDATA[ Status struct placeholder]]>
 				</Comment>
@@ -742,7 +742,7 @@ External Setpoint Generation:
 				<BitOffs>64</BitOffs>
 			</SubItem>
 			<Hides>
-				<Hide GUID="{7449352D-4DA9-474A-85AF-CFC7E9C80492}"/>
+				<Hide GUID="{6B3A53D1-B14A-400A-B270-9EA78004876C}"/>
 			</Hides>
 		</DataType>
 		<DataType>
@@ -1184,7 +1184,7 @@ External Setpoint Generation:
 	x_dwn_enc  AT %I*: ST_RenishawAbsEnc;
 	{attribute 'TcLinkTo' := '.Count:=TIIB[1-y_up_2-y_dwn]^FB Inputs Channel 1^Position'}	]]>
 					</Comment>
-					<Type GUID="{6B3A53D1-B14A-400A-B270-9EA78004876C}" Namespace="lcls_twincat_motion_sheppard">ST_RenishawAbsEnc</Type>
+					<Type GUID="{8AD2E20B-9537-4513-AFA5-50392FDB2DEE}" Namespace="lcls_twincat_motion_sheppard">ST_RenishawAbsEnc</Type>
 					<SubVar>
 						<Name>Count</Name>
 						<Comment>
@@ -1209,7 +1209,7 @@ External Setpoint Generation:
 					<Comment>
 						<![CDATA[	{attribute 'TcLinkTo' := '.Count:=TIIB[1-y_up_2-y_dwn]^FB Inputs Channel 2^Position'}]]>
 					</Comment>
-					<Type GUID="{6B3A53D1-B14A-400A-B270-9EA78004876C}" Namespace="lcls_twincat_motion_sheppard">ST_RenishawAbsEnc</Type>
+					<Type GUID="{8AD2E20B-9537-4513-AFA5-50392FDB2DEE}" Namespace="lcls_twincat_motion_sheppard">ST_RenishawAbsEnc</Type>
 					<SubVar>
 						<Name>Count</Name>
 						<Comment>
