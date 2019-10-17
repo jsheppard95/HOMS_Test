@@ -1,0 +1,16 @@
+record(bi, "TEST:MAIN:STOENABLE_RBV"){
+  field(PINI, "1")
+  field(TSE, "-2")
+  field(ZNAM, "Zero")
+  field(ONAM, "One")
+  field(INP, "@asyn($(PORT),0,1)ADSPORT=851/Main.stoEnable?")
+  field(DTYP, "asynInt32")
+  field(SCAN, "I/O Intr")
+}
+
+record(bo, "TEST:MAIN:STOENABLE"){
+  field(ZNAM, "Zero")
+  field(ONAM, "One")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT),0,1)ADSPORT=851/Main.stoEnable=")
+}
