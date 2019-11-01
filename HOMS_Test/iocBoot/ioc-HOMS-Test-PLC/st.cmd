@@ -1,4 +1,4 @@
-#!/reg/g/pcds/epics/R7.0.2-2.0/ioc/ads-ioc/v0.0.2/bin/rhel7-x86_64/adsIoc
+#!/reg/g/pcds/epics/R7.0.2-2.0/ioc/ads-ioc/v0.1.5/bin/rhel7-x86_64/adsIoc
 
 < envPaths
 
@@ -18,8 +18,8 @@ adsIoc_registerRecordDeviceDriver(pdbbase)
 adsSetLocalAddress(134.79.82.38.1.1)
 
 epicsEnvSet("ASYN_PORT",     "ASYN_PLC")
-epicsEnvSet("IPADDR",        "172.21.148.1")
-epicsEnvSet("AMSID",         "172.21.148.1.1.1")
+epicsEnvSet("IPADDR",        "172.21.42.227")
+epicsEnvSet("AMSID",         "172.21.42.227.1.1")
 epicsEnvSet("IPPORT",        "851")
 
 adsAsynPortDriverConfigure("$(ASYN_PORT)","$(IPADDR)","$(AMSID)","$(IPPORT)", 1000, 0, 0, 50, 100, 1000, 0)
@@ -28,7 +28,6 @@ cd "$(ADS_IOC_TOP)/db"
 
 epicsEnvSet("MOTOR_PORT",    "PLC_ADS")
 epicsEnvSet("PREFIX",        "PREFIX::")
-epicsEnvSet("ECM_NUMAXES",   "6")
 epicsEnvSet("NUMAXES",       "6")
 
 EthercatMCCreateController("$(MOTOR_PORT)", "$(ASYN_PORT)", "$(NUMAXES)", "200", "1000")
@@ -59,8 +58,8 @@ asynSetTraceInfoMask("$(ASYN_PORT)", -1, 5)
 #define AMPLIFIER_ON_FLAG_USING_CNEN   4
 
 epicsEnvSet("AXIS_NO",         "1")
-epicsEnvSet("MOTOR_PREFIX",    "PREFIX::")
-epicsEnvSet("MOTOR_NAME",      "Axis:Xup")
+epicsEnvSet("MOTOR_PREFIX",    "")
+epicsEnvSet("MOTOR_NAME",      "AXISXUP")
 epicsEnvSet("DESC",            "Main.M1 / Axis_Xup")
 epicsEnvSet("EGU",             "mm")
 epicsEnvSet("PREC",            "3")
@@ -74,8 +73,8 @@ dbLoadRecords("EthercatMCreadback.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME
 dbLoadRecords("EthercatMCdebug.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), MOTOR_PORT=$(MOTOR_PORT), AXIS_NO=$(AXIS_NO), PREC=3")
 
 epicsEnvSet("AXIS_NO",         "2")
-epicsEnvSet("MOTOR_PREFIX",    "PREFIX::")
-epicsEnvSet("MOTOR_NAME",      "Axis:Xdwn")
+epicsEnvSet("MOTOR_PREFIX",    "")
+epicsEnvSet("MOTOR_NAME",      "AXISXDWN")
 epicsEnvSet("DESC",            "Main.M2 / Axis_Xdwn")
 epicsEnvSet("EGU",             "mm")
 epicsEnvSet("PREC",            "3")
@@ -89,8 +88,8 @@ dbLoadRecords("EthercatMCreadback.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME
 dbLoadRecords("EthercatMCdebug.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), MOTOR_PORT=$(MOTOR_PORT), AXIS_NO=$(AXIS_NO), PREC=3")
 
 epicsEnvSet("AXIS_NO",         "3")
-epicsEnvSet("MOTOR_PREFIX",    "PREFIX::")
-epicsEnvSet("MOTOR_NAME",      "Axis:Yup")
+epicsEnvSet("MOTOR_PREFIX",    "")
+epicsEnvSet("MOTOR_NAME",      "AXISYUP")
 epicsEnvSet("DESC",            "Main.M3 / Axis_Yup")
 epicsEnvSet("EGU",             "mm")
 epicsEnvSet("PREC",            "3")
@@ -104,8 +103,8 @@ dbLoadRecords("EthercatMCreadback.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME
 dbLoadRecords("EthercatMCdebug.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), MOTOR_PORT=$(MOTOR_PORT), AXIS_NO=$(AXIS_NO), PREC=3")
 
 epicsEnvSet("AXIS_NO",         "4")
-epicsEnvSet("MOTOR_PREFIX",    "PREFIX::")
-epicsEnvSet("MOTOR_NAME",      "Axis:Ydwn")
+epicsEnvSet("MOTOR_PREFIX",    "")
+epicsEnvSet("MOTOR_NAME",      "AXISYDWN")
 epicsEnvSet("DESC",            "Main.M4 / Axis_Ydwn")
 epicsEnvSet("EGU",             "mm")
 epicsEnvSet("PREC",            "3")
@@ -119,8 +118,8 @@ dbLoadRecords("EthercatMCreadback.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME
 dbLoadRecords("EthercatMCdebug.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), MOTOR_PORT=$(MOTOR_PORT), AXIS_NO=$(AXIS_NO), PREC=3")
 
 epicsEnvSet("AXIS_NO",         "5")
-epicsEnvSet("MOTOR_PREFIX",    "PREFIX::")
-epicsEnvSet("MOTOR_NAME",      "Axis:PitchCoarse")
+epicsEnvSet("MOTOR_PREFIX",    "")
+epicsEnvSet("MOTOR_NAME",      "AXISPITCH")
 epicsEnvSet("DESC",            "Main.M5 / Axis_PitchCoarse")
 epicsEnvSet("EGU",             "mm")
 epicsEnvSet("PREC",            "3")
@@ -134,8 +133,8 @@ dbLoadRecords("EthercatMCreadback.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME
 dbLoadRecords("EthercatMCdebug.template", "PREFIX=$(MOTOR_PREFIX), MOTOR_NAME=$(MOTOR_NAME), MOTOR_PORT=$(MOTOR_PORT), AXIS_NO=$(AXIS_NO), PREC=3")
 
 epicsEnvSet("AXIS_NO",         "6")
-epicsEnvSet("MOTOR_PREFIX",    "PREFIX::")
-epicsEnvSet("MOTOR_NAME",      "Axis:Bender")
+epicsEnvSet("MOTOR_PREFIX",    "")
+epicsEnvSet("MOTOR_NAME",      "AXISBENDER")
 epicsEnvSet("DESC",            "Main.M6 / Axis_Bender")
 epicsEnvSet("EGU",             "mm")
 epicsEnvSet("PREC",            "3")
