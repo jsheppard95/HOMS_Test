@@ -6,37 +6,37 @@ VAR
 	{attribute 'pytmc' := '
 	  pv: AXISYUP
 	'}
-    M3: DUT_MotionStage; // Yup
+    M1: DUT_MotionStage; // Yup
 	fbMotionStage_y_up : FB_MotionStage;
 
 	{attribute 'pytmc' := '
 	  pv: AXISYDWN
 	'}
-	M4: DUT_MotionStage; // Ydwn
+	M2: DUT_MotionStage; // Ydwn
 	fbMotionStage_y_dwn : FB_MotionStage;
 
 	{attribute 'pytmc' := '
 	  pv: AXISXUP
 	'}
-	M1: DUT_MotionStage:=(nCommand:=3); // Xup
+	M3: DUT_MotionStage; // Xup
 	fbMotionStage_x_up : FB_MotionStage;
 
 	{attribute 'pytmc' := '
 	  pv: AXISXDWN
 	'}
-	M2: DUT_MotionStage:=(nCommand:=3); // Xdwn
+	M4: DUT_MotionStage; // Xdwn
 	fbMotionStage_x_dwn : FB_MotionStage;
 
 	{attribute 'pytmc' := '
 	  pv: AXISPITCH
 	'}
-	M5: DUT_MotionStage:=(nCommand:=3); // PitchCoarse
+	M5: DUT_MotionStage; // PitchCoarse
 	fbMotionStage_pitch : FB_MotionStage;
 
 	{attribute 'pytmc' := '
 	  pv: AXISBENDER
 	'}
-	M6: DUT_MotionStage:=(nCommand:=3); // Bender
+	M6: DUT_MotionStage; // Bender
 	fbMotionStage_bender : FB_MotionStage;
 
 	{attribute 'pytmc' := '
@@ -47,7 +47,7 @@ VAR
 
 	x_up_enc  AT %I*: ST_RenishawAbsEnc;
 	x_dwn_enc  AT %I*: ST_RenishawAbsEnc;	
-	y_up_enc  AT %I*: ST_RenishawAbsEnc;
+	y_up_enc  AT %I*: ST_RenishawAbsEnc:=(Ref:=0);
 	y_dwn_enc  AT %I*: ST_RenishawAbsEnc:=(Ref:=0);
 
 	// Auto coupling function block
@@ -62,42 +62,43 @@ VAR
 	bGantryAlreadyCoupledY : BOOL;
 	
 	// Gantry variables
-//	fEncFudgeFactor : REAL := 1.005;
+	fEncFudgeFactor : REAL := 1.05;
 	nCurrGantryX : LINT;
 	nCurrGantryY : LINT;
 	nGantryTolX : LINT := 25000;
 	nGantryTolY : LINT := 25000;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[M1.bLimitForwardEnable := TRUE;
-M1.bLimitBackwardEnable := TRUE;
+      <ST><![CDATA[stoEnable := TRUE;
+M1.bLimitForwardEnable;
+M1.bLimitBackwardEnable;
 M1.bPowerSelf := TRUE;
-M1.nEnableMode := ENUM_StageEnableMode.STAGE_ENABLE_ALWAYS;
+M1.nEnableMode := ENUM_StageEnableMode.ALWAYS;
 
-M2.bLimitForwardEnable := TRUE;
-M2.bLimitBackwardEnable := TRUE;
+M2.bLimitForwardEnable;
+M2.bLimitBackwardEnable;
 M2.bPowerSelf := TRUE;
-M2.nEnableMode := ENUM_StageEnableMode.STAGE_ENABLE_ALWAYS;
+M2.nEnableMode := ENUM_StageEnableMode.ALWAYS;
 
 M3.bLimitForwardEnable := TRUE;
 M3.bLimitBackwardEnable := TRUE;
 M3.bPowerSelf := TRUE;
-M3.nEnableMode := ENUM_StageEnableMode.STAGE_ENABLE_ALWAYS;
+M3.nEnableMode := ENUM_StageEnableMode.ALWAYS;
 
 M4.bLimitForwardEnable := TRUE;
 M4.bLimitBackwardEnable := TRUE;
 M4.bPowerSelf := TRUE;
-M4.nEnableMode := ENUM_StageEnableMode.STAGE_ENABLE_ALWAYS;
+M4.nEnableMode := ENUM_StageEnableMode.ALWAYS;
 
 M5.bLimitForwardEnable := TRUE;
 M5.bLimitBackwardEnable := TRUE;
 M5.bPowerSelf := TRUE;
-M5.nEnableMode := ENUM_StageEnableMode.STAGE_ENABLE_ALWAYS;
+M5.nEnableMode := ENUM_StageEnableMode.ALWAYS;
 
 M6.bLimitForwardEnable := TRUE;
 M6.bLimitBackwardEnable := TRUE;
 M6.bPowerSelf := TRUE;
-M6.nEnableMode := ENUM_StageEnableMode.STAGE_ENABLE_ALWAYS;
+M6.nEnableMode := ENUM_StageEnableMode.ALWAYS;
 
 // Buttons to enable motors: write 0 to enable, 2 to disable
 //M1.nEnableMode; // Yup
@@ -114,14 +115,14 @@ x_up_enc.Ref := 0;
 x_dwn_enc.Ref := 0;
 
 // Pretend encoder counts
-//y_up_enc.Count := LREAL_TO_ULINT(M1.stAxisStatus.fActPosition * fEncFudgeFactor * EXPT(10, 6));
-//y_dwn_enc.Count := LREAL_TO_ULINT(M2.stAxisStatus.fActPosition * EXPT(10, 6));
+y_up_enc.Count := LREAL_TO_ULINT(M1.stAxisStatus.fActPosition * fEncFudgeFactor * EXPT(10, 6));
+y_dwn_enc.Count := LREAL_TO_ULINT(M2.stAxisStatus.fActPosition * EXPT(10, 6));
 
 //x_up_enc.Count := LREAL_TO_ULINT(M3.stAxisStatus.fActPosition * fEncFudgeFactor * EXPT(10, 6));
 //x_dwn_enc.Count := LREAL_TO_ULINT(M4.stAxisStatus.fActPosition * EXPT(10, 6));
 
 // Gantry Differences to monitor
-//nCurrGantryY := ((ULINT_TO_LINT(y_up_enc.Count) - ULINT_TO_LINT(y_up_enc.Ref)) - (ULINT_TO_LINT(y_dwn_enc.Count) - ULINT_TO_LINT(y_dwn_enc.Ref)));
+nCurrGantryY := ((ULINT_TO_LINT(y_up_enc.Count) - ULINT_TO_LINT(y_up_enc.Ref)) - (ULINT_TO_LINT(y_dwn_enc.Count) - ULINT_TO_LINT(y_dwn_enc.Ref)));
 //nCurrGantryX := ((ULINT_TO_LINT(x_up_enc.Count) - ULINT_TO_LINT(x_up_enc.Ref)) - (ULINT_TO_LINT(x_dwn_enc.Count) - ULINT_TO_LINT(x_dwn_enc.Ref)));
 
 //E-Stop
@@ -133,12 +134,12 @@ M5.bHardwareEnable := stoEnable;
 M6.bHardwareEnable := stoEnable;
 
 // Start Autocoupling
-fbAutoCoupleX(nGantryTol:=nGantryTolX, Master:=M1, MasterEnc:=x_up_enc, Slave:=M2,
+fbAutoCoupleX(nGantryTol:=nGantryTolX, Master:=M3, MasterEnc:=x_up_enc, Slave:=M4,
 	          SlaveEnc:=x_dwn_enc, bExecuteCouple:=bExecuteCoupleX,
               bExecuteDecouple:=bExecuteDecoupleX,
               bGantryAlreadyCoupled=>bGantryAlreadyCoupledX);
 
-fbAutoCoupleY(nGantryTol:=nGantryTolY, Master:=M3, MasterEnc:=y_up_enc, Slave:=M4,
+fbAutoCoupleY(nGantryTol:=nGantryTolY, Master:=M1, MasterEnc:=y_up_enc, Slave:=M2,
 	          SlaveEnc:=y_dwn_enc, bExecuteCouple:=bExecuteCoupleY,
               bExecuteDecouple:=bExecuteDecoupleY,
 			  bGantryAlreadyCoupled=>bGantryAlreadyCoupledY);
